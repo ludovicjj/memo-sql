@@ -24,7 +24,7 @@ INSERT INTO recipe (
   (Use index for fields used often in queries, ex: id, slug)
 */
 
--- Search USING INDEX ids_slug (faster)
+-- Search USING INDEX idx_slug (faster)
 EXPLAIN QUERY PLAN SELECT * FROM recipe WHERE slug='soupe';
 -- SCAN table recipe (slower)
 EXPLAIN QUERY PLAN SELECT * FROM recipe WHERE title='Soupe';
