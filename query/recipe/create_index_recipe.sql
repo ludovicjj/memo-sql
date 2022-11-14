@@ -25,9 +25,9 @@ INSERT INTO recipe (
 */
 
 -- Search USING INDEX ids_slug (faster)
-EXPLAIN QUERY PLAN SELECT * FROM recipe WHERE slug='soupe1';
+EXPLAIN QUERY PLAN SELECT * FROM recipe WHERE slug='soupe';
 -- SCAN table recipe (slower)
-EXPLAIN QUERY PLAN SELECT * FROM recipe WHERE title='Soupe1';
+EXPLAIN QUERY PLAN SELECT * FROM recipe WHERE title='Soupe';
 
 -- List index (SQLite only)
 PRAGMA index_list('recipe');
