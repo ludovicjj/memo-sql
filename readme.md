@@ -10,6 +10,6 @@ Pense-bête des différentes requêtes SQL allant des requêtes les plus utilis�
 
 [DATATYPE](https://www.sqlite.org/datatype3.html#affinity_name_examples) SQLite
 
-## MCD et MLD du projet
+## MLD du projet
 
-![(mld)](./doc/mcd.drawio.png)
+![(mld)](./doc/mld.drawio.png)
