@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS recipe;
 DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS ingredient;
 
+-- Create table
 CREATE TABLE IF NOT EXISTS user (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     username VARCHAR(150) NOT NULL UNIQUE,
@@ -54,6 +55,7 @@ CREATE TABLE IF NOT EXISTS recipe_ingredient (
     UNIQUE (recipe_id, ingredient_id)
 );
 
+-- Set data
 INSERT INTO user (username, email)
 VALUES
     ('John Doe', 'john@doe.fr');
@@ -94,6 +96,7 @@ VALUES
        (2, 6, 3, NULL)
        ;
 
+-- Test
 -- fetch recipe who use 'oeuf' as ingredient
 SELECT r.title
 FROM ingredient i
