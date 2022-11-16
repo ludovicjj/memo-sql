@@ -69,7 +69,8 @@ VALUES
 INSERT INTO recipe (title, slug, duration, user_id)
 VALUES
        ('Soupe', 'soupe', 10, 1),
-       ('Madelaine', 'madelaine', 30, 1);
+       ('Madelaine', 'madelaine', 30, 1),
+       ('Salade de fruit', 'salade-de-fruit', 10, 1);
 
 INSERT INTO recipe_category (recipe_id, category_id)
 VALUES
@@ -84,7 +85,8 @@ VALUES
        ('levure chimique'),
        ('beurre'),
        ('lait'),
-       ('oeuf');
+       ('oeuf'),
+       ('miel');
 
 INSERT INTO recipe_ingredient (recipe_id, ingredient_id, quantity, unit)
 VALUES
@@ -93,7 +95,8 @@ VALUES
        (2, 3, 8, 'g'),
        (2, 4, 100, 'g'),
        (2, 5, 50, 'cl'),
-       (2, 6, 3, NULL)
+       (2, 6, 3, NULL),
+       (3, 1, 50, 'g')
        ;
 
 -- Test
