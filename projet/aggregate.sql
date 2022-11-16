@@ -29,3 +29,17 @@ FROM ingredient i
 LEFT JOIN recipe_ingredient ri ON i.id = ri.ingredient_id
 LEFT JOIN recipe r ON ri.recipe_id = r.id
 WHERE ri.recipe_id IS NOT NULL;
+
+-- count recipe created by user
+SELECT COUNT(r.id), u.username
+FROM recipe r
+INNER JOIN user u ON r.user_id = u.id
+GROUP BY u.id;
+
+-- calcul sum recipe duration group by user
+SELECT SUM(r.duration) AS duration
+FROM recipe r
+INNER JOIN user u ON r.user_id = u.id
+GROUP BY u.id;
+;
+

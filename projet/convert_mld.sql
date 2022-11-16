@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS recipe_ingredient (
 -- Set data
 INSERT INTO user (username, email)
 VALUES
-    ('John Doe', 'john@doe.fr');
+    ('John Doe', 'john@doe.fr'),
+    ('Jane Doe', 'jane@doe.fr');
 
 INSERT INTO category (title)
 VALUES
@@ -70,7 +71,8 @@ INSERT INTO recipe (title, slug, duration, user_id)
 VALUES
        ('Soupe', 'soupe', 10, 1),
        ('Madelaine', 'madelaine', 30, 1),
-       ('Salade de fruit', 'salade-de-fruit', 10, 1);
+       ('Salade de fruit', 'salade-de-fruit', 10, 1),
+       ('Boeuf bourguignon', 'boeuf-bourguignon', 120, 2);
 
 INSERT INTO recipe_category (recipe_id, category_id)
 VALUES
