@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS recipe_category (
 
 CREATE TABLE IF NOT EXISTS ingredient (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    name VARCHAR(150) NOT NULL
+    name VARCHAR(150) NOT NULL,
+    usage_count INTEGER DEFAULT 0 NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS recipe_ingredient (
@@ -54,6 +55,23 @@ CREATE TABLE IF NOT EXISTS recipe_ingredient (
     PRIMARY KEY (recipe_id, ingredient_id),
     UNIQUE (recipe_id, ingredient_id)
 );
+
+-- triggers
+CREATE TRIGGER increment_usage_count_on_ingredient_insert
+    AFTER INSERT ON recipe_ingredient
+BEGIN
+    UPDATE ingredient
+    SET usage_count = ingredient.usage_count + 1
+    WHERE ingredient.id = NEW.ingredient_id;
+end;
+
+CREATE TRIGGER decrement_usage_count_on_ingredient_delete
+    AFTER DELETE ON recipe_ingredient
+BEGIN
+    UPDATE ingredient
+    SET usage_count = ingredient.usage_count - 1
+    WHERE ingredient.id = OLD.ingredient_id;
+end;
 
 -- Set data
 INSERT INTO user (username, email)
@@ -69,7 +87,7 @@ VALUES
 
 INSERT INTO recipe (title, slug, duration, user_id)
 VALUES
-       ('Soupe', 'soupe', 10, 1),
+       ('Soupe à la tomate', 'soupe_a_la_tomate', 10, 1),
        ('Madelaine', 'madelaine', 30, 1),
        ('Salade de fruit', 'salade-de-fruit', 10, 1),
        ('Boeuf bourguignon', 'boeuf-bourguignon', 120, 2);
@@ -78,8 +96,10 @@ INSERT INTO recipe_category (recipe_id, category_id)
 VALUES
        (1, 1),
        (2, 2),
-       (2, 3);
-
+       (2, 3),
+       (3, 2),
+       (4, 1)
+;
 INSERT INTO ingredient (name)
 VALUES
        ('sucre'),
@@ -88,10 +108,17 @@ VALUES
        ('beurre'),
        ('lait'),
        ('oeuf'),
-       ('miel');
+       ('miel'),
+       ('eau'),
+       ('tomate'),
+       ('creme fraiche')
+;
 
 INSERT INTO recipe_ingredient (recipe_id, ingredient_id, quantity, unit)
 VALUES
+       (1, 8, 50, 'cl'),
+       (1, 9, 250, 'g'),
+       (1, 10, 10, 'g'),
        (2, 1, 150, 'g'),
        (2, 2, 200, 'g'),
        (2, 3, 8, 'g'),
