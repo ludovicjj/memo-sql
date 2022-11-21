@@ -59,10 +59,3 @@ WITH RECURSIVE cte AS (
     FROM pet p, cte
     WHERE cte.id = p.parent_id
 ) SELECT id, name, level FROM cte;
-
-WITH
-     cte1 AS ( SELECT * FROM user),
-     cte2 AS ( SELECT * FROM recipe)
-SELECT *
-FROM cte1
-JOIN cte2 ON cte1.id = cte2.user_id
