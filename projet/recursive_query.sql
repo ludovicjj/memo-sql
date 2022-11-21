@@ -37,7 +37,32 @@ WITH RECURSIVE children (id, name, parent_id, level, path) AS (
     FROM pet
     WHERE id = 10
     UNION ALL
-    SELECT p.id, p.name, p.parent_id, children.level + 1, children.path || children.name || ' > '
+    SELECT p.id, p.name, p.parent_id, children.level + 1, children.path || ' > ' || children.name
     FROM pet p, children
     WHERE children.id = p.parent_id
-) SELECT id, name, parent_id, level, path FROM children
+) SELECT id, name, parent_id, level, path FROM children;
+
+WITH RECURSIVE cte AS (
+    SELECT id, name, parent_id FROM pet WHERE id = 5
+    UNION
+    SELECT p.id, p.name, p.parent_id FROM pet p, cte WHERE p.id = cte.parent_id
+) SELECT * FROM cte;
+
+WITH RECURSIVE cte AS (
+    SELECT id, name, parent_id, 0 AS level FROM pet WHERE id = 1
+    UNION
+    SELECT
+           p.id,
+           p.name,
+           p.parent_id,
+           cte.level + 1
+    FROM pet p, cte
+    WHERE cte.id = p.parent_id
+) SELECT id, name, level FROM cte;
+
+WITH
+     cte1 AS ( SELECT * FROM user),
+     cte2 AS ( SELECT * FROM recipe)
+SELECT *
+FROM cte1
+JOIN cte2 ON cte1.id = cte2.user_id
